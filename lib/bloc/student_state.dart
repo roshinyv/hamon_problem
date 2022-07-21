@@ -8,9 +8,6 @@ class StudentState with _$StudentState {
   }) = _StudentState;
 
   factory StudentState.inital() {
-    return const StudentState(
-      isloading: false,
-      students: []
-    );
+    return const StudentState(isloading: false, students: []);
   }
 }

@@ -17,9 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => getIt<StudentBloc>())
-      ],
+      providers: [BlocProvider(create: (context) => getIt<StudentBloc>())],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(

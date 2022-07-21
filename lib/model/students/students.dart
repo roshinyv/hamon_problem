@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 
-
 part 'students.g.dart';
 
 @JsonSerializable()
@@ -31,4 +30,3 @@ class Student {
 
   Map<String, dynamic> toJson() => _$StudentToJson(this);
 }
-
