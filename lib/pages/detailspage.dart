@@ -1,10 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:hamodemo/model/students/students.dart';
 import 'package:hamodemo/widgets/app_text.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({Key? key}) : super(key: key);
+  final Student data;
+  const DetailPage({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,16 +55,16 @@ class DetailPage extends StatelessWidget {
                             const EdgeInsets.only(left: 20, right: 20, top: 30),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [AppLargeText(text: 'Samuel')],
+                          children: [AppLargeText(text: data.name!)],
                         ),
                       ),
                       DetailText(
                         text1: 'Age :',
-                        text2: '29',
+                        text2: data.age.toString(),
                       ),
                       DetailText(
                         text1: 'email :',
-                        text2: 'samuel123@gmail.com',
+                        text2: data.email!,
                       ),
                       DetailText(
                         text1: 'Teacher :',
@@ -144,7 +146,6 @@ class DetailPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                     
                         ],
                       ),
                       const SizedBox(

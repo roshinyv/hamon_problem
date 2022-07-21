@@ -1,8 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hamodemo/bloc/student_bloc.dart';
 import 'package:hamodemo/pages/detailspage.dart';
 import 'package:hamodemo/widgets/app_text.dart';
+import 'package:hamodemo/widgets/tabview.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key? key}) : super(key: key);
@@ -14,8 +17,11 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      BlocProvider.of<StudentBloc>(context)
+          .add(const StudentEvent.getStdData());
+    });
     TabController tabController = TabController(length: 3, vsync: this);
-
     return Scaffold(
       body: SafeArea(
         child: NestedScrollView(
@@ -60,7 +66,11 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             body: Container(
               child: TabBarView(
                 controller: tabController,
-                children: [TabView(), TabView(), TabView()],
+                children: [
+                  TabView(),
+                  TabView(),
+                  TabView(),
+                ],
               ),
             )),
       ),
@@ -68,60 +78,4 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   }
 }
 
-class TabView extends StatelessWidget {
-  const TabView({
-    Key? key,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      physics: const BouncingScrollPhysics(),
-      itemCount: 6,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailPage(),
-                  ));
-            },
-            child: CardView());
-      },
-    );
-  }
-}
-
-class CardView extends StatelessWidget {
-  const CardView({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Container(
-        height: 150,
-        width: 150,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          gradient: LinearGradient(
-            colors: [
-              Colors.primaries[Random().nextInt(Colors.primaries.length)],
-              Colors.primaries[Random().nextInt(Colors.primaries.length)],
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment(0.8, 1),
-          ),
-        ),
-        child: Container(),
-      ),
-    );
-  }
-}

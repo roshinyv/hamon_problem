@@ -7,8 +7,9 @@ class DemoHome extends StatefulWidget {
   State<DemoHome> createState() => _DemoHomeState();
 }
 
-class _DemoHomeState extends State<DemoHome> with SingleTickerProviderStateMixin{
- final bodyGlobalKey = GlobalKey();
+class _DemoHomeState extends State<DemoHome>
+    with SingleTickerProviderStateMixin {
+  final bodyGlobalKey = GlobalKey();
   final List<Widget> myTabs = [
     Tab(text: 'auto short'),
     Tab(text: 'auto long'),
@@ -22,7 +23,8 @@ class _DemoHomeState extends State<DemoHome> with SingleTickerProviderStateMixin
     return Stack(
       children: <Widget>[
         Placeholder(fallbackHeight: 100),
-        Positioned.fill(child: Align(alignment: Alignment.center, child: Text('Slider'))),
+        Positioned.fill(
+            child: Align(alignment: Alignment.center, child: Text('Slider'))),
       ],
     );
   }
@@ -93,7 +95,11 @@ class _DemoHomeState extends State<DemoHome> with SingleTickerProviderStateMixin
         body: Container(
           child: TabBarView(
             controller: _tabController,
-            children: [_buildTabContext(2), _buildTabContext(200), _buildTabContext(2)],
+            children: [
+              _buildTabContext(2),
+              _buildTabContext(200),
+              _buildTabContext(2)
+            ],
           ),
         ),
       ),
