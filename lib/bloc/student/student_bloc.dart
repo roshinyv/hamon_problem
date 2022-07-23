@@ -30,6 +30,7 @@ class StudentBloc extends Bloc<StudentEvent, StudentState> {
             classrooms: state.classrooms,
           ),
         );
+        return;
       }
       emit(state.copyWith(
         isloading: true,

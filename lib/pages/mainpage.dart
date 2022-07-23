@@ -64,15 +64,13 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                 )
               ];
             },
-            body: Container(
-              child: TabBarView(
-                controller: tabController,
-                children: const [
-                  StudentTabView(),
-                  SubjectTabView(),
-                  ClassroomTabView(),
-                ],
-              ),
+            body: TabBarView(
+              controller: tabController,
+              children: const [
+                StudentTabView(),
+                SubjectTabView(),
+                ClassroomTabView(),
+              ],
             )),
       ),
     );

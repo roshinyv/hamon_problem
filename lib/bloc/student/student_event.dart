@@ -5,5 +5,4 @@ class StudentEvent with _$StudentEvent {
   const factory StudentEvent.getStdData() = _GetStdData;
   const factory StudentEvent.getSubData() = _GetSubData;
   const factory StudentEvent.getClassData() = _GetClassData;
-  // const factory StudentEvent.getClassId({required int id}) = _GetClassId;
 }
