@@ -17,12 +17,9 @@ class StudentPage extends StatelessWidget {
       backgroundColor: Colors.grey.shade300,
       body: SafeArea(
           child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.center,
-        // mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(
-            height: 120,
-          ),
+        
           Stack(
             children: [
               Card(
@@ -67,72 +64,6 @@ class StudentPage extends StatelessWidget {
                       DetailText(
                         text1: 'email :',
                         text2: student.email!,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                              padding: const EdgeInsets.all(0.0),
-                              elevation: 5,
-                            ),
-                            onPressed: () {
-                              print('add button');
-                            },
-                            child: Ink(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25),
-                                gradient: const LinearGradient(
-                                    colors: [Colors.blue, Colors.indigoAccent]),
-                              ),
-                              child: Container(
-                                padding: const EdgeInsets.all(10),
-                                constraints:
-                                    const BoxConstraints(minWidth: 88.0),
-                                child: const Text('Add',
-                                    textAlign: TextAlign.center),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                              padding: const EdgeInsets.all(0.0),
-                              elevation: 5,
-                            ),
-                            onPressed: () {
-                              print('add button');
-                            },
-                            child: Ink(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25),
-                                  gradient: buttonca < 5
-                                      ? LinearGradient(colors: [
-                                          Colors.red,
-                                          Colors.red.shade900
-                                        ])
-                                      : LinearGradient(colors: [
-                                          Colors.grey,
-                                          Colors.grey.shade500
-                                        ])),
-                              child: Container(
-                                padding: const EdgeInsets.all(10),
-                                constraints:
-                                    const BoxConstraints(minWidth: 88.0),
-                                child: const Text('Delete',
-                                    textAlign: TextAlign.center),
-                              ),
-                            ),
-                          ),
-                        ],
                       ),
                       const SizedBox(
                         height: 20,

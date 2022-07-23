@@ -21,16 +21,16 @@ class StudentBloc extends Bloc<StudentEvent, StudentState> {
 
   StudentBloc(this._apiServices) : super(StudentState.inital()) {
     on<_GetStdData>((event, emit) async {
-      // if (state.students!.isNotEmpty) {
-      //   emit(
-      //     StudentState(
-      //       isloading: false,
-      //       students: state.students,
-      //       subjects: state.subjects,
-      //       classrooms: state.classrooms,
-      //     ),
-      //   );
-      // }
+      if (state.students!.isNotEmpty) {
+        emit(
+          StudentState(
+            isloading: false,
+            students: state.students,
+            subjects: state.subjects,
+            classrooms: state.classrooms,
+          ),
+        );
+      }
       emit(state.copyWith(
         isloading: true,
       ));

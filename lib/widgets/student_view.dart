@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hamodemo/bloc/student/student_bloc.dart';
 import 'package:hamodemo/model/students/students.dart';
-import 'package:hamodemo/pages/detailspage.dart';
 import 'package:hamodemo/pages/student_page.dart';
 import 'package:hamodemo/widgets/app_text.dart';
 
@@ -20,8 +19,8 @@ class StudentTabView extends StatelessWidget {
         if (state.isloading) {
           return const Center(
               child: SizedBox(
-            height: 50,
-            width: 50,
+            height: 30,
+            width: 30,
             child: CircularProgressIndicator(),
           ));
         }
@@ -32,7 +31,6 @@ class StudentTabView extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           itemCount: stdData!.length,
           itemBuilder: (context, index) {
-            print(stdData.length.toString());
             return GestureDetector(
               onTap: () {
                 Navigator.push(

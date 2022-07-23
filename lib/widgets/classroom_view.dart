@@ -20,8 +20,8 @@ class ClassroomTabView extends StatelessWidget {
         if (state.isloading) {
           return const Center(
               child: SizedBox(
-            height: 50,
-            width: 50,
+            height: 30,
+            width: 30,
             child: CircularProgressIndicator(),
           ));
         }

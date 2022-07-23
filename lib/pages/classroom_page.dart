@@ -17,7 +17,7 @@ class ClassroomPage extends StatefulWidget {
 
 class _ClassroomPageState extends State<ClassroomPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController textId = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,6 @@ class _ClassroomPageState extends State<ClassroomPage> {
       BlocProvider.of<ClassroomBloc>(context)
           .add(ClassroomEvent.started(indexId: widget.indexId));
     });
-    int buttonca = 8;
     final int pageIndex = widget.indexId;
 
     return Scaffold(
@@ -49,13 +48,9 @@ class _ClassroomPageState extends State<ClassroomPage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     child: Container(
-                      // height: 150,
-                      // width: 300,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Colors.white70
-                      
-                          ),
+                          color: Colors.white70),
                       child: Column(
                         children: [
                           const SizedBox(
@@ -85,42 +80,44 @@ class _ClassroomPageState extends State<ClassroomPage> {
                                   text1: 'Subject :',
                                   text2: classroomDetails.subject.toString(),
                                 ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 35, vertical: 20),
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    width: 1.0),
-                                color: Colors.white,
-                              ),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: TextFormField(
-                                      key: _formKey,
-                                      keyboardType: TextInputType.number,
-                                      controller: textId,
-                                      validator: (value) {
-                                        return Validator.validateName(
-                                            value ?? "");
-                                      },
-                                      decoration: const InputDecoration(
-                                        hintText: "Enter Subject ID",
-                                        contentPadding: EdgeInsets.only(
-                                          left: 15,
+                          Form(
+                            key: _formKey,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 35, vertical: 20),
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      width: 1.0),
+                                  color: Colors.white,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: TextFormField(
+                                        keyboardType: TextInputType.number,
+                                        controller: _textController,
+                                        validator: (value) {
+                                          return Validator.validateNo(
+                                              value ?? "");
+                                        },
+                                        decoration: const InputDecoration(
+                                          hintText: "Enter Subject ID",
+                                          contentPadding: EdgeInsets.only(
+                                            left: 15,
+                                          ),
+                                          border: InputBorder.none,
+                                          focusedBorder: InputBorder.none,
+                                          enabledBorder: InputBorder.none,
+                                          errorBorder: InputBorder.none,
+                                          disabledBorder: InputBorder.none,
                                         ),
-                                        border: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
-                                        enabledBorder: InputBorder.none,
-                                        errorBorder: InputBorder.none,
-                                        disabledBorder: InputBorder.none,
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -136,79 +133,49 @@ class _ClassroomPageState extends State<ClassroomPage> {
                                   elevation: 5,
                                 ),
                                 onPressed: () {
-                                  // if (_formKey.currentState!.validate()) {
-                                  //   ScaffoldMessenger.of(context)
-                                  //       .showSnackBar(SnackBar(
-                                  //     content: const Text('Processing Data'),
-                                  //     backgroundColor: Colors.green.shade300,
-                                  //   ));
-                                  //   ScaffoldMessenger.of(context)
-                                  //       .hideCurrentSnackBar();
-                                  //   if (textId == 0) {
-                                  //     ScaffoldMessenger.of(context)
-                                  //         .showSnackBar(SnackBar(
-                                  //       content:
-                                  //           Text('Please enter subject ID'),
-                                  //       backgroundColor: Colors.red.shade300,
-                                  //     ));
-                                  //   }
-                                  // }
+                                  if (_textController.text.isNotEmpty) {
+                                    final chkTxt =
+                                        int.parse(_textController.text);
+                                    if (chkTxt <= 6) {
+                                      BlocProvider.of<ClassroomBloc>(context)
+                                          .add(ClassroomEvent.postSub(
+                                              subId: int.parse(
+                                                  _textController.text),
+                                              pageId: pageIndex));
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: const Text('No Subject Found'),
+                                        backgroundColor: Colors.red.shade300,
+                                      ));
+                                    }
+                                  } else {
+                                    _formKey.currentState!.validate();
+                                  }
                                   print('add button');
-                                  int txted = int.parse(textId.text);
-                                  BlocProvider.of<ClassroomBloc>(context).add(
-                                      ClassroomEvent.postSub(
-                                          subId: txted, pageId: pageIndex));
                                 },
                                 child: Ink(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(25),
-                                    gradient: const LinearGradient(colors: [
-                                      Colors.blue,
-                                      Colors.indigoAccent
-                                    ]),
+                                    gradient: classroomDetails.subject == 0
+                                        ? LinearGradient(colors: [
+                                            Colors.blue,
+                                            Colors.indigo.shade700
+                                          ])
+                                        : LinearGradient(colors: [
+                                            Colors.green,
+                                            Colors.green.shade700
+                                          ]),
                                   ),
                                   child: Container(
-                                    padding: const EdgeInsets.all(10),
-                                    constraints:
-                                        const BoxConstraints(minWidth: 88.0),
-                                    child: const Text('Add',
-                                        textAlign: TextAlign.center),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  padding: const EdgeInsets.all(0.0),
-                                  elevation: 5,
-                                ),
-                                onPressed: () {
-                                  print('del button');
-                                },
-                                child: Ink(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(25),
-                                      gradient: buttonca < 5
-                                          ? LinearGradient(colors: [
-                                              Colors.red,
-                                              Colors.red.shade900
-                                            ])
-                                          : LinearGradient(colors: [
-                                              Colors.grey,
-                                              Colors.grey.shade500
-                                            ])),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(10),
-                                    constraints:
-                                        const BoxConstraints(minWidth: 88.0),
-                                    child: const Text('Delete',
-                                        textAlign: TextAlign.center),
-                                  ),
+                                      padding: const EdgeInsets.all(10),
+                                      constraints:
+                                          const BoxConstraints(minWidth: 88.0),
+                                      child: classroomDetails.subject == 0
+                                          ? const Text('Add',
+                                              textAlign: TextAlign.center)
+                                          : const Text('Update',
+                                              textAlign: TextAlign.center)),
                                 ),
                               ),
                             ],

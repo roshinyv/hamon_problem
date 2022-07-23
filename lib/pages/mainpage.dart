@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hamodemo/bloc/student/student_bloc.dart';
-import 'package:hamodemo/pages/detailspage.dart';
 import 'package:hamodemo/widgets/app_text.dart';
 import 'package:hamodemo/widgets/classroom_view.dart';
 import 'package:hamodemo/widgets/student_view.dart';
