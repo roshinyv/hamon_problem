@@ -9,7 +9,12 @@ class Classroom {
   String? name;
   int? size;
 
-  Classroom({this.id, this.layout, this.name, this.size});
+  Classroom({
+    this.id,
+    this.layout,
+    this.name,
+    this.size,
+  });
 
   factory Classroom.fromJson(Map<String, dynamic> json) {
     return _$ClassroomFromJson(json);
@@ -30,4 +35,3 @@ class Classrooms {
 
   Map<String, dynamic> toJson() => _$ClassroomsToJson(this);
 }
-

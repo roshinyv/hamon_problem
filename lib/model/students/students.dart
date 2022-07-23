@@ -22,7 +22,12 @@ class Student {
   int? id;
   String? name;
 
-  Student({this.age, this.email, this.id, this.name});
+  Student({
+    this.age,
+    this.email,
+    this.id,
+    this.name,
+  });
 
   factory Student.fromJson(Map<String, dynamic> json) {
     return _$StudentFromJson(json);

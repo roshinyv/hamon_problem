@@ -1,20 +1,13 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:hamodemo/model/classrooms/classrooms/classroom.dart';
-import 'package:hamodemo/model/students/students.dart';
 import 'package:hamodemo/model/subjects/subjects/subject.dart';
 import 'package:hamodemo/widgets/app_text.dart';
 
-class DetailPage extends StatelessWidget {
-  final Student student;
-  // final Subject subject;
-  // final Classroom classroom;
-  const DetailPage({
+class SubjectPage extends StatelessWidget {
+  final Subject subject;
+
+  const SubjectPage({
     Key? key,
-    required this.student,
-    // required this.classroom,
-    // required this.subject,
+    required this.subject,
   }) : super(key: key);
 
   @override
@@ -64,33 +57,17 @@ class DetailPage extends StatelessWidget {
                             const EdgeInsets.only(left: 20, right: 20, top: 30),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [AppLargeText(text: student.name!)],
+                          children: [AppLargeText(text: subject.name!)],
                         ),
                       ),
                       DetailText(
-                        text1: 'Age :',
-                        text2: student.age.toString(),
+                        text1: 'Credits :',
+                        text2: subject.credits.toString(),
                       ),
                       DetailText(
-                        text1: 'email :',
-                        text2: student.email!,
+                        text1: 'Teacher :',
+                        text2: subject.teacher!,
                       ),
-                      // DetailText(
-                      //   text1: 'Teacher :',
-                      //   text2: 'Brenda Miller',
-                      // ),
-                      // DetailText(
-                      //   text1: 'credits :',
-                      //   text2: '10',
-                      // ),
-                      // DetailText(
-                      //   text1: 'size :',
-                      //   text2: '24',
-                      // ),
-                      // DetailText(
-                      //   text1: 'layout :',
-                      //   text2: 'conference',
-                      // ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

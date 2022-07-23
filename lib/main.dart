@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hamodemo/bloc/student_bloc.dart';
-import 'package:hamodemo/pages/demopage.dart';
-import 'package:hamodemo/pages/homepage.dart';
+import 'package:hamodemo/bloc/student/student_bloc.dart';
 import 'package:hamodemo/pages/mainpage.dart';
 import 'package:hamodemo/utils/di/injectable.dart';
+
+import 'bloc/classroom/classroom_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,12 +17,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => getIt<StudentBloc>())],
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<StudentBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<ClassroomBloc>(),
+        )
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
         debugShowCheckedModeBanner: false,
         home: MainPage(),
       ),

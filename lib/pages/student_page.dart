@@ -1,20 +1,13 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:hamodemo/model/classrooms/classrooms/classroom.dart';
 import 'package:hamodemo/model/students/students.dart';
-import 'package:hamodemo/model/subjects/subjects/subject.dart';
 import 'package:hamodemo/widgets/app_text.dart';
 
-class DetailPage extends StatelessWidget {
+class StudentPage extends StatelessWidget {
   final Student student;
-  // final Subject subject;
-  // final Classroom classroom;
-  const DetailPage({
+
+  const StudentPage({
     Key? key,
     required this.student,
-    // required this.classroom,
-    // required this.subject,
   }) : super(key: key);
 
   @override
@@ -75,22 +68,6 @@ class DetailPage extends StatelessWidget {
                         text1: 'email :',
                         text2: student.email!,
                       ),
-                      // DetailText(
-                      //   text1: 'Teacher :',
-                      //   text2: 'Brenda Miller',
-                      // ),
-                      // DetailText(
-                      //   text1: 'credits :',
-                      //   text2: '10',
-                      // ),
-                      // DetailText(
-                      //   text1: 'size :',
-                      //   text2: '24',
-                      // ),
-                      // DetailText(
-                      //   text1: 'layout :',
-                      //   text2: 'conference',
-                      // ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

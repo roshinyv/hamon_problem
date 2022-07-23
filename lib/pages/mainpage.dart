@@ -2,10 +2,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hamodemo/bloc/student_bloc.dart';
+import 'package:hamodemo/bloc/student/student_bloc.dart';
 import 'package:hamodemo/pages/detailspage.dart';
 import 'package:hamodemo/widgets/app_text.dart';
-import 'package:hamodemo/widgets/tabview.dart';
+import 'package:hamodemo/widgets/classroom_view.dart';
+import 'package:hamodemo/widgets/student_view.dart';
+import 'package:hamodemo/widgets/subject_view.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key? key}) : super(key: key);
@@ -66,10 +68,10 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             body: Container(
               child: TabBarView(
                 controller: tabController,
-                children: [
-                  TabView(),
-                  TabView(),
-                  TabView(),
+                children: const [
+                  StudentTabView(),
+                  SubjectTabView(),
+                  ClassroomTabView(),
                 ],
               ),
             )),

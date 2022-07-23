@@ -2,13 +2,14 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hamodemo/bloc/student_bloc.dart';
-import 'package:hamodemo/model/students/students.dart';
-import 'package:hamodemo/pages/detailspage.dart';
+import 'package:hamodemo/bloc/student/student_bloc.dart';
+import 'package:hamodemo/model/classrooms/classrooms/classroom.dart';
+import 'package:hamodemo/pages/classroom_page.dart';
+
 import 'package:hamodemo/widgets/app_text.dart';
 
-class TabView extends StatelessWidget {
-  const TabView({
+class ClassroomTabView extends StatelessWidget {
+  const ClassroomTabView({
     Key? key,
   }) : super(key: key);
 
@@ -17,25 +18,32 @@ class TabView extends StatelessWidget {
     return BlocBuilder<StudentBloc, StudentState>(
       builder: (context, state) {
         if (state.isloading) {
-          return CircularProgressIndicator();
+          return const Center(
+              child: SizedBox(
+            height: 50,
+            width: 50,
+            child: CircularProgressIndicator(),
+          ));
         }
-        final stdData = state.students;
+        final stateData = state.classrooms;
         return ListView.builder(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           physics: const BouncingScrollPhysics(),
-          itemCount: stdData!.length,
+          itemCount: stateData!.length,
           itemBuilder: (context, index) {
-            print(stdData.length.toString());
+            print(stateData.length.toString());
             return GestureDetector(
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => DetailPage(data: stdData[index]),
+                      builder: (context) => ClassroomPage(
+                        indexId: index,
+                      ),
                     ));
               },
-              child: CardView(student: stdData[index]),
+              child: CardView(classroom: stateData[index]),
             );
           },
         );
@@ -45,8 +53,8 @@ class TabView extends StatelessWidget {
 }
 
 class CardView extends StatelessWidget {
-  final Student student;
-  const CardView({Key? key, required this.student}) : super(key: key);
+  final Classroom classroom;
+  const CardView({Key? key, required this.classroom}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +89,7 @@ class CardView extends StatelessWidget {
                         size: 18,
                       ),
                       AppLargeText(
-                        text: student.name!,
+                        text: classroom.name!,
                         size: 20,
                       ),
                     ],
@@ -92,10 +100,10 @@ class CardView extends StatelessWidget {
                   Row(
                     children: [
                       const AppSmallText(
-                        text: 'Age : ',
+                        text: 'Layout : ',
                         size: 15,
                       ),
-                      AppSmallText(text: student.age.toString()),
+                      AppSmallText(text: classroom.layout!),
                     ],
                   ),
                   const SizedBox(
@@ -104,10 +112,10 @@ class CardView extends StatelessWidget {
                   Row(
                     children: [
                       const AppSmallText(
-                        text: 'Email : ',
+                        text: 'Size : ',
                         size: 15,
                       ),
-                      AppSmallText(text: student.email!),
+                      AppSmallText(text: classroom.size.toString()),
                     ],
                   ),
                 ],

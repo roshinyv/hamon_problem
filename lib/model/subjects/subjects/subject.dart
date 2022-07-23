@@ -22,7 +22,12 @@ class Subject {
   String? name;
   String? teacher;
 
-  Subject({this.credits, this.id, this.name, this.teacher});
+  Subject({
+    this.credits,
+    this.id,
+    this.name,
+    this.teacher,
+  });
 
   factory Subject.fromJson(Map<String, dynamic> json) {
     return _$SubjectFromJson(json);
